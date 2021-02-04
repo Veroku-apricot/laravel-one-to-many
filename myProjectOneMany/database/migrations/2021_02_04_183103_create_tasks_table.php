@@ -20,6 +20,8 @@ class CreateTasksTable extends Migration
             $table ->text('description', 60);
             $table ->tinyInteger('priority') -> unsigned();
 
+            $table ->bigInteger('employee_id') -> unsigned();
+            
             $table->timestamps();
         });
     }

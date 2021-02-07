@@ -7,14 +7,15 @@
   <ul>
     @foreach ($employees as $employee)
       <li>
-        {{ $employee -> name }}
-        {{ $employee -> lastname }}
+        <a href="{{ route('employee-show', $employee -> id) }}">
+          {{ $employee -> name }}
+          {{ $employee -> lastname }}
+        </a>
         <ul>
           @foreach ($employee -> tasks as $task)
             <li>
               {{ $task -> title}}
             </li>
-
           @endforeach
         </ul>
       </li>

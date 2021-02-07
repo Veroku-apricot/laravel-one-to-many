@@ -8,7 +8,9 @@
     Tasks:
     @foreach ($employee -> tasks as $task)
       <li>
-        {{ $task -> title}}
+        <a href="{{ route('task-show', $task -> id) }}">
+          {{ $task -> title }}
+        </a>
       </li>
     @endforeach
   </h2>

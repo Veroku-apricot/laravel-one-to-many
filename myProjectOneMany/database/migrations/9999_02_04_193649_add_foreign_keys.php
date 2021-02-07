@@ -47,7 +47,7 @@ class AddForeignKeys extends Migration
 
       });
 
-      Schema::table('task_location', function (Blueprint $table) {
+      Schema::table('task_typology', function (Blueprint $table) {
 
         $table -> dropForeign('el-typology');
         $table -> dropForeign('el-task');

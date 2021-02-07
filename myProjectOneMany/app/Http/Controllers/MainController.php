@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Employee;
+use App\Task;
 
 class MainController extends Controller
 {
@@ -19,6 +20,13 @@ class MainController extends Controller
 
     $employee = Employee::findOrFail($id);
     return view('pages.employee-show', compact('employee'));
+
+  }
+
+  public function taskShow($id) {
+
+    $task = Task::findOrFail($id);
+    return view('pages.task-show', compact('task'));
 
   }
 

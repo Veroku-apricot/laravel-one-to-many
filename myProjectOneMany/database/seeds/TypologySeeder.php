@@ -14,7 +14,7 @@ class TypologySeeder extends Seeder
      */
     public function run()
     {
-      factory(Typology::class, 50)
+      factory(Typology::class, 20)
           -> create()
           -> each(function($typo) {
 

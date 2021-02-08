@@ -18,3 +18,5 @@ Route::get('/typology', 'TypologyController@typologyIndex') -> name('typology-in
 Route::get('/typology/create', 'TypologyController@typologyCreate') -> name('typology-create');
 Route::post('/typology/store', 'TypologyController@typologyStore') -> name('typology-store');
 Route::get('/typology/{id}', 'TypologyController@typologyShow') -> name('typology-show');
+Route::get('/typology/edit/{id}', 'TypologyController@typologyEdit') -> name('typology-edit');
+Route::post('/typology/update/{id}', 'TypologyController@typologyUpdate') -> name('typology-update');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Employee;
 use App\Task;
 use App\Typology;
 
@@ -24,11 +23,38 @@ class TypologyController extends Controller
 
   public function typologyCreate() {
 
-    $employees = Employee::all();
-    return view('pages.task-create', compact('employees'));
+    $tasks = Task::all();
+    return view('pages.typology-create', compact('tasks'));
   }
   public function typologyStore(Request $request) {
 
     $data = $request -> all();
+    $typology = Typology::make($request -> all());
+    $typology -> save();
+    $tasks = Task::findOrFail($data['tasks']);
+    $typology -> tasks() -> attach($tasks);
+
+    return redirect() -> route('typology-index');
+  }
+
+  public function typologyEdit($id) {
+
+    $typology = Typology::findOrFail($id);
+    $tasks = Task::all();
+
+    return view('pages.typology-edit', compact('typology', 'tasks'));
+  }
+  public function typologyUpdate(Request $request, $id) {
+
+    $data = $request -> all();
+
+    $typology = Typology::findOrFail($id);
+    $typology -> update($data);
+    $typology -> save();
+
+    $tasks = Task::findOrFail($data['tasks']);
+    $typology -> tasks() -> sync($tasks);
+
+    return redirect() -> route('typology-index');
   }
 }

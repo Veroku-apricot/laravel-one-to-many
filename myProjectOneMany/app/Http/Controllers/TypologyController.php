@@ -29,10 +29,9 @@ class TypologyController extends Controller
   public function typologyStore(Request $request) {
 
     $data = $request -> all();
-    $typology = Typology::make($request -> all());
-    $typology -> save();
+    $newTypology = Typology::create($data);
     $tasks = Task::findOrFail($data['tasks']);
-    $typology -> tasks() -> attach($tasks);
+    $newTypology -> tasks() -> attach($tasks);
 
     return redirect() -> route('typology-index');
   }
@@ -50,10 +49,17 @@ class TypologyController extends Controller
 
     $typology = Typology::findOrFail($id);
     $typology -> update($data);
-    $typology -> save();
 
-    $tasks = Task::findOrFail($data['tasks']);
-    $typology -> tasks() -> sync($tasks);
+    if (array_key_exists('tasks', $data)) {
+
+      $tasks = Task::findOrFail($data['tasks']);
+      $typology -> tasks() -> sync($tasks);
+
+    }else {
+
+      $typology -> tasks() -> sync([]);
+
+    }
 
     return redirect() -> route('typology-index');
   }

@@ -21,12 +21,15 @@
     <br>
     @foreach ($tasks as $task)
       <input type="checkbox" name="tasks[]" value="{{ $task -> id }}"
+        @if ($typology -> tasks -> contains($task -> id))
+          checked
+        @endif
 
-        @foreach ($typology -> tasks as $t_task)
+        {{-- @foreach ($typology -> tasks as $t_task)
           @if ($t_task -> id == $task -> id)
             checked
           @endif
-        @endforeach
+        @endforeach --}}
       >
       {{ $task -> title }}
       <br>

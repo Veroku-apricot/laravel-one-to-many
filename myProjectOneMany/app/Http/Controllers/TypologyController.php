@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Task;
 use App\Typology;
+use Illuminate\Support\Facades\Validator;
 
 class TypologyController extends Controller
 {
@@ -29,9 +30,16 @@ class TypologyController extends Controller
   public function typologyStore(Request $request) {
 
     $data = $request -> all();
+
+    Validator::make($data, [
+            'name' => 'required|min:3',
+            'description' => 'required|min:5|max:20'
+        ]) -> validate();
+
     $newTypology = Typology::create($data);
     $tasks = Task::findOrFail($data['tasks']);
     $newTypology -> tasks() -> attach($tasks);
+
 
     return redirect() -> route('typology-index');
   }
@@ -46,6 +54,11 @@ class TypologyController extends Controller
   public function typologyUpdate(Request $request, $id) {
 
     $data = $request -> all();
+
+    Validator::make($data, [
+            'name' => 'required|min:3',
+            'description' => 'required|min:5|max:60'
+        ]) -> validate();
 
     $typology = Typology::findOrFail($id);
     $typology -> update($data);

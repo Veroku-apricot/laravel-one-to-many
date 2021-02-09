@@ -4,6 +4,16 @@
 
   <h1>Edit Task</h1>
 
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+
   <form class="" action="{{ route('typology-update', $typology -> id) }}" method="post">
 
     @csrf

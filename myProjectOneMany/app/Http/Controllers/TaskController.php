@@ -31,8 +31,8 @@ class TaskController extends Controller
   public function taskStore(Request $request) {
 
     $data = $request -> all();
-    $employee = Employee::findOrFail($data['employee_id']);
     $task = Task::make($request -> all());
+    $employee = Employee::findOrFail($data['employee_id']);
     $task -> employee() -> associate($employee);
     $task -> save();
 
